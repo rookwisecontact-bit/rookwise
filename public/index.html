@@ -24,13 +24,14 @@
 
 <header class="topbar">
   <button class="icon-btn menu-btn" id="menuBtn" title="Games"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-  <div class="brand"><span id="logo"></span><div><b>Rookwise</b><small>chess game analysis</small></div></div>
+  <a class="brand" href="./" title="Rookwise – home"><span id="logo"></span><div><b>Rookwise</b><small>chess game analysis</small></div></a>
   <form class="search" id="searchForm" autocomplete="off">
     <span class="search-ico" data-ui="search"></span>
     <input id="nick" placeholder="Chess.com username" spellcheck="false">
     <button class="btn primary" type="submit">Show games</button>
   </form>
   <div class="spacer"></div>
+  <a class="support-btn hidden" id="supportBtn" target="_blank" rel="noopener"><span>♥</span> Support</a>
   <button class="icon-btn" id="settingsBtn" title="Settings" data-ui="gear"></button>
 </header>
 
@@ -101,6 +102,7 @@
 <div class="modal-back hidden" id="modalBack"><div class="modal" id="modal"></div></div>
 <div class="toasts" id="toasts"></div>
 
+<script src="js/config.js"></script>
 <script src="js/pieces.js"></script>
 <script src="js/chess.js"></script>
 <script src="js/analysis.js"></script>

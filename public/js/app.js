@@ -117,7 +117,7 @@
     } else strikeInto(d, sr, 0, jit(PLACE, 1), 1.8, .75, 1);                 // bierka stawiana na planszy
     let peak = 0;
     for (let i = 0; i < n; i++) { d[i] *= Math.min(1, (L - i / sr) / 0.01); peak = Math.max(peak, Math.abs(d[i])); }
-    for (let i = 0; i < n; i++) d[i] *= 0.4 / (peak || 1);   // głośność (o połowę ciszej)
+    for (let i = 0; i < n; i++) d[i] *= 0.2 / (peak || 1);   // głośność
     return buf;
   }
   function sound(capture) {
