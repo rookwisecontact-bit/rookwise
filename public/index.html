@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rookwise – free chess game analysis</title>
+<meta name="description" content="Free chess game analysis: import your games by username and get every move rated – brilliant moves, blunders, accuracy and best lines. Runs in your browser.">
+<meta property="og:title" content="Rookwise – free chess game analysis">
+<meta property="og:description" content="Every move rated: brilliants, blunders, accuracy and best lines. Free, private, in your browser.">
+<meta name="theme-color" content="#12110f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='4' y='4' width='92' height='92' rx='24' fill='%23e0a83e'/%3E%3Cpath fill='%23fff' d='M30%2022h8v7h7v-7h10v7h7v-7h8v16l-6%205v19l5%206v6H31v-6l5-6V43l-6-5z'/%3E%3Crect x='27' y='74' width='46' height='8' rx='3' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <radialGradient id="icoShade" cx="0.35" cy="0.25" r="0.85">
+      <stop offset="0" stop-color="#fff" stop-opacity=".28"/>
+      <stop offset=".6" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".18"/>
+    </radialGradient>
+  </defs>
+</svg>
+
+<header class="topbar">
+  <button class="icon-btn menu-btn" id="menuBtn" title="Games"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  <div class="brand"><span id="logo"></span><div><b>Rookwise</b><small>chess game analysis</small></div></div>
+  <form class="search" id="searchForm" autocomplete="off">
+    <span class="search-ico" data-ui="search"></span>
+    <input id="nick" placeholder="Chess.com username" spellcheck="false">
+    <button class="btn primary" type="submit">Show games</button>
+  </form>
+  <div class="spacer"></div>
+  <button class="icon-btn" id="settingsBtn" title="Settings" data-ui="gear"></button>
+</header>
+
+<main class="app">
+  <!-- Lista partii -->
+  <aside class="games" id="gamesPane">
+    <div class="games-head">
+      <h2>Your games</h2><span class="count" id="gameCount"></span>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="filter-row">
+      <div class="seg" id="resultSeg">
+        <button data-r="all" class="on">All</button><button data-r="win">Wins</button><button data-r="loss">Losses</button><button data-r="draw">Draws</button>
+      </div>
+    </div>
+    <div class="opp-search"><span data-ui="search"></span><input id="oppSearch" placeholder="Search opponent…" spellcheck="false"></div>
+    <div class="game-list" id="gameList"></div>
+  </aside>
+
+  <!-- Plansza -->
+  <section class="stage" id="stage">
+    <div class="player" id="playerTop"></div>
+    <div class="board-row">
+      <div class="evalbar" id="evalbar"><div class="eval-fill" id="evalFill"></div><span class="eval-txt" id="evalTxt">0.0</span></div>
+      <div class="board-wrap" id="boardWrap">
+        <div class="board" id="board">
+          <div class="squares" id="squares"></div>
+          <div class="layer" id="hl"></div>
+          <div class="layer" id="pieces"></div>
+          <svg class="layer arrows" id="arrows"></svg>
+          <div class="layer" id="badges"></div>
+        </div>
+        <div class="overlay hidden" id="overlay">
+          <div class="ov-card">
+            <svg viewBox="0 0 120 120" class="ring-lg"><circle cx="60" cy="60" r="52" class="ring-bg"/><circle cx="60" cy="60" r="52" class="ring-fg" id="ovRing"/></svg>
+            <div class="ov-pct" id="ovPct">0%</div>
+            <div class="ov-msg" id="ovMsg">Analyzing game…</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="player" id="playerBottom"></div>
+    <div class="graph" id="graph"><svg id="graphSvg"></svg><div class="graph-tip hidden" id="graphTip"></div></div>
+  </section>
+
+  <!-- Panel -->
+  <aside class="panel">
+    <div class="tabs" id="tabs">
+      <button data-tab="summary" class="on"><span data-ui="chart"></span>Summary</button>
+      <button data-tab="moves"><span data-ui="bulb"></span>Move review</button>
+    </div>
+    <div class="tab-body" id="tabSummary"></div>
+    <div class="tab-body hidden" id="tabMoves">
+      <div class="coach" id="coach"></div>
+      <div class="movelist" id="moveList"></div>
+    </div>
+    <div class="nav">
+      <button class="nav-btn" id="navFirst" title="Start (Home)" data-ui="first"></button>
+      <button class="nav-btn" id="navPrev" title="Previous move (←)" data-ui="prev"></button>
+      <button class="nav-btn big" id="navNext" title="Next move (→)" data-ui="next"></button>
+      <button class="nav-btn" id="navLast" title="End (End)" data-ui="last"></button>
+      <span class="nav-sep"></span>
+      <button class="nav-btn" id="navFlip" title="Flip board (F)" data-ui="flip"></button>
+    </div>
+  </aside>
+</main>
+
+<div class="modal-back hidden" id="modalBack"><div class="modal" id="modal"></div></div>
+<div class="toasts" id="toasts"></div>
+
+<script src="js/pieces.js"></script>
+<script src="js/chess.js"></script>
+<script src="js/analysis.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

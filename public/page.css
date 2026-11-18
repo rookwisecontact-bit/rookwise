@@ -1,0 +1,5 @@
+body{margin:0;background:#12110f;color:#f2f0eb;font:15px/1.65 "Segoe UI",system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:40px 22px 80px}
+a{color:#9fd26a}h1{font-size:28px;margin:0 0 6px}h2{font-size:19px;margin:28px 0 8px}
+p,li{color:#d6d2ca}.top{display:flex;align-items:center;gap:10px;margin-bottom:28px;text-decoration:none;color:#f2f0eb;font-weight:700}
+.top img{width:34px;height:34px}small{color:#8d8982}
