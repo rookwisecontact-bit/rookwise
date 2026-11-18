@@ -170,8 +170,14 @@
     $("evalbar").classList.toggle("flipped", S.flipped);
   }
 
+  const isPhone = () => window.innerWidth <= 760;
   function boardSize() {
     const st = $("stage");
+    if (isPhone()) {   // telefon: szachownica na całą szerokość, ale zostawia miejsce na komentarze i przyciski
+      const availW = st.clientWidth - 16 - 26 - 8;
+      const availH = window.innerHeight - 56 - 2 * 34 - 44 - 76 - 150;
+      return Math.max(200, Math.floor(Math.min(availW, availH) / 8) * 8);
+    }
     const availW = st.clientWidth - 48 - 36;
     const availH = st.clientHeight - 28 - 92 - 86;
     return Math.max(280, Math.floor(Math.min(availW, availH) / 8) * 8);
@@ -181,7 +187,7 @@
     $("board").style.width = $("board").style.height = size + "px";
     $("evalbar").style.height = size + "px";
     $("graph").style.width = (size + 36) + "px";
-    $("graph").style.height = "74px";
+    $("graph").style.height = isPhone() ? "44px" : "74px";
     document.querySelectorAll(".player").forEach((p) => p.style.width = (size + 36) + "px");
     S.sq = size / 8;
     render(false);
@@ -740,6 +746,18 @@
   $("navNext").onclick = () => { if (S.ply === 0 && S.tab === "summary") setTab("moves"); goto(S.ply + 1); };
   $("navLast").onclick = () => S.review && goto(S.review.moves.length, false);
   $("navFlip").onclick = flip;
+  if (isPhone()) $("nick").placeholder = "Username";
+  // telefon: przesunięcie palcem po szachownicy = następny / poprzedni ruch
+  (() => {
+    let x0 = null, y0 = null;
+    const bw = $("boardWrap");
+    bw.addEventListener("touchstart", (e) => { if (e.touches.length === 1) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; } }, { passive: true });
+    bw.addEventListener("touchend", (e) => {
+      if (x0 === null || !S.review) return;
+      const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; x0 = null;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > 1.5 * Math.abs(dy)) { if (dx < 0) $("navNext").onclick(); else goto(S.ply - 1); }
+    }, { passive: true });
+  })();
   function flip() { S.flipped = !S.flipped; buildSquares(); render(false); }
   document.addEventListener("keydown", (e) => {
     if (e.target.tagName === "INPUT" || e.target.tagName === "SELECT") return;

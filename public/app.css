@@ -291,7 +291,7 @@ svg { display: block; }
 .nav-btn svg { width: 19px; height: 19px; }
 .nav-btn:hover { background: var(--panel3); color: #fff; }
 .nav-btn.big { flex: 1.6; background: linear-gradient(180deg, #edb956, #cf9334); color: #22180b; box-shadow: 0 3px 0 #94661f; }
-.nav-btn.big:hover { background: linear-gradient(180deg, #9bd062, #78b043); }
+.nav-btn.big:hover { background: linear-gradient(180deg, #f2c266, #d69c3c); }
 .nav-sep { width: 6px; }
 
 /* ---------- Okna i powiadomienia ---------- */
@@ -349,8 +349,27 @@ select.field option { background: #1a1917; color: #f2f0eb; }
 @media (max-width: 760px) {
   body { overflow: auto; }
   .app { grid-template-columns: 1fr; height: auto; }
-  .panel { min-height: 70vh; }
   .search .btn { padding: 0 10px; }
+  /* górny pasek mieści się w szerokości telefonu */
+  .topbar { gap: 8px; padding: 0 10px; }
+  .spacer { display: none; }
+  .search { min-width: 0; flex: 1; padding-left: 10px; }
+  .search .search-ico { display: none; }
+  .search input { min-width: 0; width: 100%; font-size: 16px; }
+  .search .btn { font-size: 0; white-space: nowrap; padding: 0 14px; }
+  .search .btn::after { content: "Go"; font-size: 14px; }
+  .brand .logo-svg { width: 32px; height: 32px; }
+  .support-btn { margin-right: 0; }
+  /* szachownica przyklejona u góry podczas przewijania */
+  .stage { position: sticky; top: 0; z-index: 15; background: var(--bg); padding: 6px 8px 6px; box-shadow: 0 8px 16px rgba(0,0,0,.35); }
+  .player { height: 34px; }
+  .graph { margin-top: 4px; }
+  .board-wrap { touch-action: pan-y; }
+  /* przyciski ruchów zawsze na dole ekranu, pod kciukiem */
+  .panel { min-height: 60vh; padding-bottom: calc(76px + env(safe-area-inset-bottom)); border-left: 0; }
+  .nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 25; padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+         background: rgba(24,22,20,.96); backdrop-filter: blur(10px); border-top: 1px solid #2e2b27; }
+  .nav-btn { height: 50px; }
 }
 .piece-sw { display: flex; border-radius: 9px; border: 2px solid transparent; background: var(--light-sq); cursor: pointer; padding: 1px; }
 .piece-sw img { width: 26px; height: 26px; }
