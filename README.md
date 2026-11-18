@@ -25,6 +25,7 @@ python serve.py
 Pierwsze uruchomienie pobiera pliki silnika do `public/engine/`.
 
 ## Przed publikacją – podmień
+- `TWOJA_NAZWA` w `public/js/config.js` → link do Twojego Ko-fi (dopóki nie podmienisz, przycisk Support jest ukryty)
 - `CHANGE_ME@example.com` w `functions/proxy/[[path]].js` i `serve.py`
 - `CONTACT_EMAIL` w `about.html`, `privacy.html`, `terms.html`
 - `LAST_UPDATED` w `privacy.html`, `terms.html` (dzisiejsza data)
@@ -32,8 +33,8 @@ Pierwsze uruchomienie pobiera pliki silnika do `public/engine/`.
 
 ## Publikacja (Cloudflare Pages, za darmo)
 1. Konto na github.com → nowe **publiczne** repozytorium `chess-review`.
-2. Wgraj zawartość tego folderu (razem z `public/engine/` i `public/data/`).
-3. dash.cloudflare.com → Workers & Pages → Create → Pages → **Connect to Git** → wybierz repo.
+2. Wgraj zawartość tego folderu (Add file → Upload files, przeciągnij wszystko) (razem z `public/engine/` i `public/data/`).
+3. dash.cloudflare.com → Workers & Pages → Create → Pages → **Connect to Git** → wybierz repo. Project name: `rookwise` → adres `rookwise.pages.dev`.
 4. Build command: *(puste)*, Build output directory: `public`. Deploy.
 5. Folder `functions/` zostanie wykryty automatycznie (proxy `/proxy/*`).
 6. Strona działa pod `https://<nazwa>.pages.dev`. Własna domena: Custom domains → dodaj.
